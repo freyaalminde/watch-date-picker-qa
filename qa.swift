@@ -110,9 +110,9 @@ string.append("<title>WDP QA</title>")
 string.append("<link rel='stylesheet' href='./qa.css'/>")
 string.append("<body>")
 
-func table(_ filename: (String) -> String, _ alternateFilename: ((String) -> String)? = nil) {
+func table(_ class: String = "", _ filename: (String) -> String, _ alternateFilename: ((String) -> String)? = nil) {
   //string.append("<h2>\(filename(""))</h2>")
-  string.append("<table>")
+  string.append("<table class='" + `class` + "'>")
   string.append("  <thead>")
   string.append("    <tr>")
   string.append("      <th/>")
@@ -141,15 +141,22 @@ func table(_ filename: (String) -> String, _ alternateFilename: ((String) -> Str
 //table({ "TimeInputView\($0)" }, { "TimeInputView\($0)~system" })
 table { "TimeInputView\($0)" }
 table { "TimeInputView\($0)~system" }
+
 table { "DatePicker-1\($0)" }
 table { "DatePicker-2\($0)" }
 table { "DatePicker-3\($0)" }
+
 table { "DatePicker_date-1\($0)" }
 table { "DatePicker_date-2\($0)" }
+
 table { "DatePicker_date-2-D\($0)" }
 table { "DatePicker_date-2-M\($0)" }
 table { "DatePicker_date-2-Y\($0)" }
+
 table { "DatePicker_hourAndMinute-1\($0)" }
 table { "DatePicker_hourAndMinute-2\($0)" }
+
+table("nomask") { "StandaloneDateInputView\($0)" }
+table("nomask") { "StandaloneTimeInputView\($0)" }
 
 try! string.write(toFile: "./index.html", atomically: true, encoding: .utf8)
