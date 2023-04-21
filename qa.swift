@@ -23,22 +23,61 @@ let sizes = [
 
 // TODO: load from filesystem instead
 let locales = [
+//  "ar",
+//  "da",
+//  "de",
+//  "el",
+//  "en",
+//  "es",
+//  "fi",
+//  "fr",
+//  "he",
+//  "ja",
+//  "nl",
+//  "ro",
+//  "ru",
+//  "sv",
+//  "zh-Hans",
+//  "zh-Hant",
+
   "ar",
+  "bg",
+  "ca",
+  "cs",
   "da",
   "de",
   "el",
   "en",
   "es",
+  "es_419",
   "fi",
   "fr",
   "he",
+  "hi",
+  "hr",
+  "hu",
+  "id",
+  "it",
   "ja",
+  "kk",
+  "ko",
+  "ms",
   "nl",
+  "no",
+  "pl",
+  "pt_BR",
+  "pt_PT",
   "ro",
   "ru",
+  "sk",
   "sv",
-  "zh-Hans",
-  "zh-Hant",
+  "th",
+  "tr",
+  "uk",
+  "vi",
+  "zh_CN",
+  "zh_HK",
+  "zh_TW",
 ]
 
 //for size in sizes.keys {
@@ -106,13 +145,14 @@ let locales = [
 //}
 
 var string = String()
-string.append("<title>WDP QA</title>")
+string.append("<title>Watch Date Picker</title>")
 string.append("<link rel='stylesheet' href='./qa.css'/>")
 string.append("<body>")
 
 let version = "9.4"
 
-func table(class: String = "", _ filename: (String) -> String, _ alternateFilename: ((String) -> String)? = nil) {
+func table(class: String = "", locale: String? = nil, _ filename: (String) -> String, _ alternateFilename: ((String) -> String)? = nil) {
+  let locales = locales.filter { locale == nil || $0 == locale }
   //string.append("<h2>\(filename(""))</h2>")
   string.append("<table class='" + `class` + "'>")
   string.append("  <thead>")
@@ -153,14 +193,14 @@ table { "DatePicker_date-2-Y\($0)" }
 table { "DatePicker_hourAndMinute-1\($0)" }
 table { "DatePicker_hourAndMinute-2\($0)" }
 
-table(class: "nomask") { "StandaloneDateInputView\($0)" }
-table(class: "nomask") { "StandaloneTimeInputView\($0)" }
-table(class: "nomask") { "StandaloneTimeInputView_24hr\($0)" }
-table(class: "nomask") { "StandaloneTimeInputView_24hrHidden\($0)" }
+table(class: "nomask", locale: "en") { "StandaloneDateInputView\($0)" }
+table(class: "nomask", locale: "en") { "StandaloneTimeInputView\($0)" }
+table(class: "nomask", locale: "en") { "StandaloneTimeInputView_24hr\($0)" }
+table(class: "nomask", locale: "en") { "StandaloneTimeInputView_24hrHidden\($0)" }
 
 //table { "TimeInputViewComparison\($0)" }
-table({ "TimeInputView\($0)" }, { "TimeInputView\($0)~system" })
-//table { "TimeInputView\($0)" }
-//table { "TimeInputView\($0)~system" }
+//table({ "TimeInputView\($0)" }, { "TimeInputView\($0)~system" })
+table { "TimeInputView\($0)" }
+table { "TimeInputView\($0)~system" }
 
 try! string.write(toFile: "./index.html", atomically: true, encoding: .utf8)
