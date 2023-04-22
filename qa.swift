@@ -149,7 +149,7 @@ string.append("<title>Watch Date Picker</title>")
 string.append("<link rel='stylesheet' href='./qa.css'/>")
 string.append("<body>")
 
-let version = "9.4"
+let version = "9.1"
 
 func table(class: String = "", locale: String? = nil, _ filename: (String) -> String, _ alternateFilename: ((String) -> String)? = nil) {
   let locales = locales.filter { locale == nil || $0 == locale }
